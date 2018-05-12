@@ -39,9 +39,9 @@ public:
 	};
 	
 	void insertNode(int val);
+	void deleteNode(int val);
 	void displayList();
 };
-
 
 void List::insertNode(int val){
 
@@ -57,6 +57,36 @@ void List::insertNode(int val){
 	}
 	tmp->setNext(newNode);
  }
+}
+
+void List::deleteNode(int val){
+
+  if(head==NULL){
+    cout<<"Underflow"<<endl;
+  }
+  else if((head->getValue())== val){
+    Node* tmp = head;
+    head = head->getNext();
+    tmp->setNext(NULL);
+    delete tmp;
+  }
+  else{
+    Node *tmp,*prev;
+    tmp = head;
+    prev = head;
+    while(tmp!=NULL){
+	if((tmp->getValue())==val){
+	   prev->setNext(tmp->getNext());
+           delete tmp;
+	   break;
+	}
+        prev = tmp;
+	tmp = tmp->getNext();
+    }
+    if(tmp==NULL){
+	cout<<"Value Not Found"<<endl;
+    }	
+  }
 }
 
 void List::displayList(){
@@ -78,9 +108,53 @@ void List::displayList(){
 int main(){
 
  List chain;
-// chain.insertNode(10);
- //chain.insertNode(7);
- //chain.insertNode(8);
+ chain.insertNode(10);
+ chain.insertNode(7);
+ chain.insertNode(8);
 
  chain.displayList();
+ chain.deleteNode(0);
+ chain.displayList();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
